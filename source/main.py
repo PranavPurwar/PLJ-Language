@@ -10,7 +10,7 @@ reserved = {
 
     'print'  : 'PRINT',
 
-    'if'     : 'IF', 
+    'if'     : 'IF',
 
 }
 
@@ -22,33 +22,33 @@ tokens = [
 
     'NUMBER',
 
-    'PLUS', 
+    'PLUS',
 
-    'MINUS', 
+    'MINUS',
 
-    'TIMES', 
+    'TIMES',
 
     'DIVIDE',
 
-    'LPAREN', 
+    'LPAREN',
 
-    'RPAREN', 
+    'RPAREN',
 
-    'LBRACE', 
+    'LBRACE',
 
-    'RBRACE', 
+    'RBRACE',
 
-    'QUESTIONMARK', 
+    'QUESTIONMARK',
 
-    'SINGLEQUOTE', 
+    'SINGLEQUOTE',
 
-    'DOUBLEQUOTE', 
+    'DOUBLEQUOTE',
 
-    'ALPHABET', 
+    'ALPHABET',
 
-    'COMMENT', 
+    'COMMENT',
 
-    'EQUALS', 
+    'EQUALS',
 
     'IF_EQUALS',
 
@@ -88,13 +88,13 @@ t_IF_EQUALS            = r'\=='
 
 def t_EXIT(t):
 
-   r'exit()'
+    r'exit()'
 
-   print("Quitting program...")
+    print("Quitting program...")
 
-   quit()
+    quit()
 
-   return t
+    return t
 
 def t_PRINT(t):
 
@@ -104,13 +104,13 @@ def t_PRINT(t):
 
 def t_ALPHABET(t):
 
-     r'[a-zA-Z_][a-zA-Z_0-9]*'
+    r'[a-zA-Z_][a-zA-Z_0-9]*'
 
-     if t.value in var:
+    if t.value in var:
 
-         t.value = var[str(t.value)]
+        t.value = var[str(t.value)]
 
-     return t
+    return t
 
 def t_NUMBER(t):
 
@@ -142,7 +142,6 @@ def t_error(t):
 
     t.lexer.skip(1)
 
- 
 
 t_ignore = ' \t'
 
@@ -160,7 +159,6 @@ def p_expression_arithmetic(t):
 
                   | expression DIVIDE expression"""
 
-                  
 
     if t[2] == '+'  : t[0] = t[1] + t[3]
 
@@ -176,7 +174,7 @@ def p_expression_advance(t):
 
                   | expression EQUALS expression"""
 
-                  
+
 
     if t[2] == "==":
 
@@ -196,7 +194,7 @@ def p_expression_advance(t):
 
         pass
 
-            
+
 
 def p_expression_if(t):
 
