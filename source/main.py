@@ -27,6 +27,8 @@ tokens = [
     'MINUS',
 
     'TIMES',
+    
+    'EXPONENT',
 
     'DIVIDE',
 
@@ -61,6 +63,8 @@ t_PLUS                  = r'\+'
 t_MINUS                = r'-'
 
 t_TIMES                = r'\*'
+
+t_EXPONENT             = r'\^'
 
 t_DIVIDE                = r'/'
 
@@ -157,16 +161,24 @@ def p_expression_arithmetic(t):
 
                   | expression TIMES expression
 
-                  | expression DIVIDE expression"""
+                  | expression DIVIDE expression
+                  
+                  | expression EXPONENT expression"""
 
 
-    if t[2] == '+'  : t[0] = t[1] + t[3]
+    if t[2] == '+'  :
+        if ((isinstance(t[1], int) and isinstance(t[3], int)) or (isinstance(t[1], str) and isinstance(t[3], str))):
+            t[0] = t[1] + t[3]
+        elif isinstance(t[1], str) and isinstance(t[3], int):
+            t[0] = t[1] + str(t[3])
 
     elif t[2] == '-': t[0] = t[1] - t[3]
 
     elif t[2] == '*': t[0] = t[1] * t[3]
 
     elif t[2] == '/': t[0] = t[1] / t[3]
+    
+    elif t[2] == '^': t[0] = t[1] ** t[3]
 
 def p_expression_advance(t):
 
